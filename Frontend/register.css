@@ -1,0 +1,113 @@
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-image: url('https://i.pinimg.com/736x/57/df/c3/57dfc33b2acec6b57db195f87b0b1782.jpg');
+       background-size: cover;
+       font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    }
+    .container {
+      background-color: #f4f4f4;
+      opacity: 98%;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+      width: 100%;
+      max-width: 60%;
+      display: flex;
+    }
+    h2 {
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-group select{
+      width: 105%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-group i {
+      margin-right: 10px;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #007bff;
+    }
+    .form-group label {
+      font-weight: bold;
+    }
+    .btn {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      width: 100%;
+      display: block;
+      margin-top: 20px;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+ 
+    .right{
+        margin-left: 15%;
+        width: 50%;
+    }
+    .left{
+        margin-left: 2%;
+       
+       width: 45%;
+    }
+  
+    .close-icon {
+       
+      position: relative;
+        font-size: 50px;
+        color: #0e0d0d;
+        margin-left: 100px;
+        text-decoration: none;
+      }
+  
+      .close-icon:hover {
+        color: #0b0000;
+      }
+
+
+      @media screen and (max-width: 1200px) {
+        .container {
+    
+            display: inline;
+            border-radius: 0px;
+            padding-left: 20%;
+        }
+    
+        body {
+           
+            background-image: url('https://i.pinimg.com/736x/57/df/c3/57dfc33b2acec6b57db195f87b0b1782.jpg');
+             image-rendering: crisp-edges;
+             object-fit: cover;
+    
+        }
+        .left{
+            margin-left: 15%;
+            width: 50%;
+        }
+       
+
+    }

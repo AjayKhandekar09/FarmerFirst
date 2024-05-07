@@ -1,0 +1,73 @@
+body{
+    font-family: "Montserrat", sans-serif;
+}
+h1{
+    font-weight: 700;
+}
+
+.btn1{
+    height: 45px;
+    width: 35%;
+    border: none;
+    outline: none;
+    /* background-color: rgb(248,26,92); */
+    color: white;
+    font-weight: 700;
+    border-radius: 60px;
+}
+
+.btn1:hover{
+    background-color: rgb(28, 16, 20);
+    transition: 0.5s;
+
+}
+
+.card:hover{
+    box-shadow: -2px -1px 92px -7px rgba(0,0,0,0.5);
+-webkit-box-shadow: -2px -1px 92px -7px rgba(0,0,0,0.5);
+-moz-box-shadow: -2px -1px 92px -7px rgba(0, 0, 0, 0.5);
+transition: 0.5s;
+}
+
+
+
+
+
+
+.advanced{
+
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+
+.btn-secondary,
+.btn-secondary:focus,
+.btn-secondary:active
+
+
+ {
+    color: #fff;
+    background-color:  rgb(248,26,92) !important;
+    border-color: #000801 !important;
+    box-shadow: none;
+}
+
+
+.advanced{
+
+    color: #3cb742 !important;
+}
+
+.form-control:focus{
+    box-shadow: none;
+    border: 1px solid  #3cb742 ;
+
+
+}
+
+.cartImage {
+    width : 4rem;
+    margin-left : 3.5rem;
+}

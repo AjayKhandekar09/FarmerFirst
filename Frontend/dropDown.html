@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <p>Registered Address</p><br><br>
+            <select name="country" class="countries order-alpha" id="registeredCountry">
+                <option value="">Select Country</option>
+            </select>
+            <select name="state" class="states order-alpha" id="registeredState">
+                <option value="">Select State</option>
+            </select>
+            <select name="city" class="cities order-alpha" id="registeredCity">
+                <option value="">Select City</option>
+            </select>
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <p>Warehouse Address</p><br><br>
+            <select name="country" class="countries order-alpha" id="warehouseCountry">
+                <option value="">Select Country</option>
+            </select>
+            <select name="state" class="states order-alpha" id="warehouseState">
+                <option value="">Select State</option>
+            </select>
+            <select name="city" class="cities order-alpha" id="warehouseCity">
+                <option value="">Select City</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        // Function to populate dropdown with countries from an API
+        function populateCountriesDropdown() {
+            var registeredCountryDropdown = document.getElementById("registeredCountry");
+            var warehouseCountryDropdown = document.getElementById("warehouseCountry");
+            
+            fetch('https://restcountries.com/v3.1/all') // Using restcountries API to fetch countries data
+            .then(response => response.json())
+            .then(data => {
+                data.forEach(country => {
+                    var option = document.createElement("option");
+                    option.text = country.name.common;
+                    option.value = country.name.common;
+                    registeredCountryDropdown.add(option);
+                    
+                    var optionWarehouse = document.createElement("option");
+                    optionWarehouse.text = country.name.common;
+                    optionWarehouse.value = country.name.common;
+                    warehouseCountryDropdown.add(optionWarehouse);
+                });
+            })
+            .catch(error => console.error('Error fetching countries:', error));
+        }
+
+        // Call the function to populate countries dropdowns on page load
+        window.onload = populateCountriesDropdown;
+    </script>
+</body>
+</html>

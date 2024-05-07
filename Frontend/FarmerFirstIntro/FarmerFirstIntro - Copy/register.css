@@ -1,0 +1,100 @@
+.container {
+    display: flex;
+    width: 70%;
+    background-color: rgba(193, 192, 127, 0.5);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    margin-top: 1%;
+    background-image: url('https://i.pinimg.com/736x/57/df/c3/57dfc33b2acec6b57db195f87b0b1782.jpg');
+    background-size: cover;
+    font-family: "Montserrat", sans-serif;
+    background-position: center;
+}
+
+.personalInfo {
+    font-size: larger;
+
+    margin-left: 20px;
+    width: 50%;
+
+
+}
+
+.personalInfo-elements {
+    padding: 5%;
+   display: grid;
+}
+
+.personalInfo input {
+    width: 60%;
+    font-size: medium;
+    padding: 8px;
+}
+
+.personalInfo select {
+    width: 65%;
+    font-size: medium;
+    padding: 8px;
+
+}
+
+.contactInfo {
+   
+    width: 50%;
+
+    justify-content: center;
+    font-size: larger;
+    display: grid;
+    gap: 20px;
+}
+
+.contactInfo input {
+    width: 100%;
+    font-size: medium;
+    padding: 8px;
+
+}
+
+.submitButton {
+    height: 30px;
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: center;
+
+}
+
+.submitButton button {
+    border-radius: 20px;
+    background-color: rgb(139, 155, 207);
+}
+
+@media screen and (max-width: 1200px) {
+    .container {
+
+        display: inline;
+        border-radius: 0px;
+        padding-left: 20%;
+    }
+
+    body {
+       
+        background-image: url('https://i.pinimg.com/736x/57/df/c3/57dfc33b2acec6b57db195f87b0b1782.jpg');
+         image-rendering: crisp-edges;
+         object-fit: fill;
+
+    }
+
+.personalInfo {
+    font-size: small;
+}
+.contactInfo{
+    font-size: small;
+}
+
+
+}

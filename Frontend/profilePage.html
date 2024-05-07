@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="homePage.css"> -->
+    <title>homePage</title>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="profile">
+                    <img class="img-fluid" src="images/farmerProfile.jpg">
+                </div>
+                <div class="col-md-5 fileIp">
+                    <input class="form-control bg-info fileIpActual" id="formFileLg" type="file">
+                </div>
+                <div class="col-md-5 fileIp editDiv">
+                    <button class="btn bg-info editButton">
+                       Edit Profile
+                    </button>
+                </div>
+                <div class="col-md-5 fileIp saveDiv">
+                    <button class="btn bg-info saveButton">
+                       Save Profile
+                    </button>
+                </div>
+            </div>
+            <form class="form g-3 col-6 needs-validation forms" nonvalidate>
+                <div class="col">
+                    <label class="form-label">Name</label>
+                    <input class="form-control"  required readonly value="Ram Patil" >              
+                </div>
+                <div class="col">
+                    <label class="form-label">Age</label>
+                    <input class="form-control"  required 
+                    readonly value="26">              
+                </div>
+                <div class="col">
+                    <label class="form-label">Gender</label>
+                    <select class="form-select"  disabled required >  
+                    <option selected disabled value=""></option>
+                    <option selected>Male</option>
+                    <option>Female</option>
+                    </select>
+                </div>
+              
+                <div class="col">
+                    <label class="form-label">Email</label>
+                    <input class="form-control" type="email" required readonly value="rampatil@gmail.com">
+                </div>
+                <div class="col">
+                    <label class="form-label">Phone Number</label>
+                    <input class="form-control" type="text" required readonly value="1234567890">
+                </div>
+    
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">Country</label>
+                        <select class="form-select" required disabled>
+                            <option selected disabled value="Country"></option>
+                            <option selected>India</option>
+                            <option>USA</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label">State</label>
+                        <select class="form-select" required disabled>
+                            <option selected disabled value="State"></option>
+                            <option selected>Maharashtra</option>
+                            
+                        </select>
+                    </div>
+    
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">District</label>
+                        <select class="form-select" required disabled>
+                            <option selected disabled value="District"></option>
+                            <option selected>Kolhapur</option>
+                    
+                        </select>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="form-label">City</label>
+                        <select class="form-select" required disabled>
+                            <span>Qty:</span>
+                            <option selected disabled value="City"></option>
+                            <option selected>Ichalkaranji</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label class="form-label">Locality</label>
+                        <input type="text" class="form-control" required readonly value="Patil mala , sangli road">
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <label class="form-label">Pincode</label>
+                        <input type="text" class="form-control" required readonly value="416115">
+                    </div>
+                </div>
+    </form>
+        </div>
+    </div>
+</body>
+<style>
+    .forms {
+        /* background-color: green; */
+        background-color: rgba(255, 255, 255, 0);
+        margin: 0rem;
+        padding: 0rem;
+        padding-right: 0rem;
+        margin-top: 2rem;
+    }
+    body {
+    padding-left : 0;
+    padding-right : 0;
+    background-image: url("images/farmBackground.png");
+    background-repeat: repeat;
+    background-size: cover; color: rgb(0, 0, 0)
+    }
+    .profile {
+        width:40%;
+        margin : auto;
+        margin-top: 2rem;
+    }
+    .fileIp{
+        top:auto;
+        margin : auto;
+
+        padding-left: auto;
+    }
+    .fileIpActual {
+        background-color: aqua;
+    }
+    .editDiv , .saveDiv {
+        width : 8rem;
+        height: 2rem;
+        margin:auto;
+        padding-left : auto;
+        margin-top : 2rem;
+
+       
+    }
+</style>
+
+<script>
+
+    const editButton = document.querySelector(".editButton");
+    editButton.addEventListener("click" , enableEdit);
+
+    const saveButton = document.querySelector(".saveButton");
+    saveButton.addEventListener("click" , disableEdit);
+
+    function enableEdit() {
+        const forms = document.querySelector(".forms")
+        console.log(forms);
+        for(const i of forms) {
+            if(i.localName === "input")
+             i.readOnly = false;
+            else if(i.localName == "select")
+            i.disabled = false;
+        }
+
+    } 
+
+
+    // enableEdit();
+    function disableEdit() {
+        const forms = document.querySelector(".forms")
+        console.log(forms);
+        for(const i of forms) {
+            if(i.localName === "input")
+             i.readOnly = true;
+            else if(i.localName == "select")
+            i.disabled = true;
+        }
+
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</html>
