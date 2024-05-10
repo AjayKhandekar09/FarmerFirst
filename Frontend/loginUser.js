@@ -1,8 +1,5 @@
 let userData
 
-
-
-
 const loginUser = async (event) => {
     event.preventDefault()
     console.log("KKKKK");

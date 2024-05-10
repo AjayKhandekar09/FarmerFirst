@@ -1,12 +1,11 @@
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser"
-const app = express()
-const CORS_ORIGIN = "http://127.0.0.1:5500/register.html"
+const app = new express()
 app.use(cors({
-    origin: "http://127.0.0.1:5500",
-    credentials : true
-}))
+    origin: ["http://localhost:8000","http://127.0.0.1:5500"],
+    credentials: true
+}));
 app.use(express.json({
     limit : "16kb"
 }))

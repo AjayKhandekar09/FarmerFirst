@@ -180,7 +180,7 @@ const logoutUser = asyncHandler(async (req , res) => {
         }
     )
     const options = {
-        httpsOnly : true,
+        httpOnly : true,
         // secure : true
     }
     return res
@@ -190,10 +190,29 @@ const logoutUser = asyncHandler(async (req , res) => {
     .json(201 , {} , "User Logout successfully")
 })
 
+const addProduct = asyncHandler(async (req, res) => {
+    try {
+        // Your code to process the request goes here
 
-const addProduct = asyncHandler(async (req,res) => {
-    userData
-})
+        // For example, you can simulate an error condition
+        // throw new Error("This is a simulated error");
+
+        // If the request processing is successful, send a success response
+        return res.status(200).json({ message: "Product added successfully" });
+    } catch (error) {
+        // If an error occurs during request processing, handle the error
+        console.error("Error in addProduct:", error);
+        // Check if the error is an instance of ApiError (custom error)
+        if (error instanceof ApiError) {
+            // If it's a known API error, return the error message and status code
+            return res.status(error.statusCode).json({ message: error.message });
+        } else {
+            // If it's an unexpected error, return a generic error message with 500 status code
+            return res.status(500).json({ message: "Internal Server Error" });
+        }
+    }
+});
+
 
 export {
     registerUser,
