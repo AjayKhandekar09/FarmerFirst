@@ -117,3 +117,93 @@ const logoutUser = async function(event) {
 //         console.log(error);
 //     }
 // }
+async function addProduct(event) {
+    event.preventDefault(); // Prevent default form submission
+    if (!sessionStorage.getItem("userData")) {
+        alert("Please log in first");
+        return;
+    }
+
+    const productData = new FormData(event.target);
+    const userData = (sessionStorage.getItem("userData"));
+    console.log(userData);
+
+
+    const formData = new FormData();
+    formData.append('productName', productData.get('product_name'));
+    formData.append('productQuantity', productData.get('product_quantity'));
+    formData.append('productPrice', productData.get('product_price'));
+    formData.append('productDescription', productData.get('product_description'));
+    formData.append('productImage', productData.get('product_image'));
+    formData.append('userData', userData);
+
+    try {
+        const response = await fetch("http://localhost:8000/api/user/add", {
+            method: "POST",
+            body: formData
+        });
+
+        if (response.ok) {
+            console.log("Product added successfully!");
+        } else {
+            console.error("Failed to add product:", response.statusText);
+        }
+    } catch (error) {
+        console.error("An error occurred while adding the product:", error);
+    }
+}
+
+
+async function searchProduct(event) {
+    event.preventDefault();
+    const searchText = document.querySelector(".searchIcon");
+    const queryProduct = searchText.value;
+    console.log(queryProduct);
+    const jsonData = {
+        product : queryProduct
+    }
+
+    try {
+        const response = await fetch("http://localhost:8000/api/user/buyProduct", {
+            method : "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body : JSON.stringify(jsonData)
+        })
+
+        if(response.ok) {
+            const data = await response.json();
+            const productInfo = data.productInfo;
+            console.log(productInfo);
+            var productSection = document.querySelector('.productSection'); // Corrected selector
+            productSection.innerHTML = ''; // Clear previous products
+            var productRow = document.createElement('div');
+            productRow.classList.add('row');
+            productInfo.forEach(function(product) { // Iterate over all products in productInfo
+                var productHTML = `
+                    <div class="col-lg-3 text-center">
+                        <div class="card border-0 bg-light mb-2">
+                            <div class="card-body">
+                                <img src="${product.images}" alt="${product.name}" class="img-fluid">
+                            </div>
+                        </div>
+                        <h6>${product.name}</h6>
+                        <p>${product.pricePerProduct} Rs</p>
+                        <p>farmer : ${product.farmer.username}</p>
+                        <p>quantity : ${product.quantity}</p>
+                    </div>
+                `;
+                productRow.innerHTML += productHTML;
+            });
+            productSection.appendChild(productRow); // Append the product row to the product section
+
+        }
+        else {
+            alert(response.message)
+        }
+    } catch (error) {
+        
+    }
+}
+

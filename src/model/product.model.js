@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
-import loadType from "mongoose-float"
+// import loadType from "mongoose-float"
 
-const Float = loadType(mongoose) 
+// const Float = loadType(mongoose) 
 
 const productSchema = new mongoose.Schema({
     name: {
@@ -14,16 +14,12 @@ const productSchema = new mongoose.Schema({
         required : true
     },
     pricePerProduct: {
-        type : Float,
+        type : Number,
         required : true,
     },
     description: {
         type : String,
         maxLength : 500
-    },
-    isAvailable: {
-        type : Boolean,
-        required : true
     },
     images: {
         type : String,

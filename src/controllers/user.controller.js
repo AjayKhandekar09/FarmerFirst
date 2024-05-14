@@ -1,6 +1,7 @@
 import {asyncHandler} from "../utils/asyncHandler.utils.js"
 import { ApiError } from "../utils/ApiError.utils.js"
 import { User } from "../model/user.model.js"
+import {Product} from "../model/product.model.js"
 import { uploadOnCloudinary } from "../utils/cloudinary.utils.js"
 import { ApiResponse} from "../utils/ApiResponse.utils.js"
 
@@ -192,31 +193,112 @@ const logoutUser = asyncHandler(async (req , res) => {
 
 const addProduct = asyncHandler(async (req, res) => {
     try {
-        // Your code to process the request goes here
+        console.log(req.body);
 
-        // For example, you can simulate an error condition
-        // throw new Error("This is a simulated error");
+        const userDataObject = JSON.parse(req.body.userData);
 
-        // If the request processing is successful, send a success response
+        const userId = userDataObject.user._id; // Access _id property
+        // const userId = req.body.id;
+        // const userId = req.body.userData?.user?._id;
+        if (!userId) {
+            return res.status(400).json({ message: "User ID not provided in request body" });
+        }
+
+        const farmer = await User.findOne({ _id: userId });
+
+        if (!farmer) {
+            return res.status(404).json({ message: "Farmer not found" });
+        }
+
+        const productImageLocal = req.files?.productImage[0]?.path;
+        if (!productImageLocal) {
+            return res.status(400).json({ message: "Image not found in request" });
+        }
+
+        const productImage = await uploadOnCloudinary(productImageLocal);
+
+        if (!productImage) {
+            return res.status(500).json({ message: "Failed to upload image" });
+        }
+
+        const productData = await Product.create({
+            name: req.body.productName.toLowerCase(),
+            quantity: req.body.productQuantity,
+            pricePerProduct: req.body.productPrice,
+            images: productImage.url,
+            description: req.body.productDescription,
+            farmer: userId, // Using userId instead of req.body.farmer._id
+        });
+
+        // No need to call save() on productData, as it's already created with create()
+
         return res.status(200).json({ message: "Product added successfully" });
     } catch (error) {
-        // If an error occurs during request processing, handle the error
-        console.error("Error in addProduct:", error);
-        // Check if the error is an instance of ApiError (custom error)
-        if (error instanceof ApiError) {
-            // If it's a known API error, return the error message and status code
-            return res.status(error.statusCode).json({ message: error.message });
-        } else {
-            // If it's an unexpected error, return a generic error message with 500 status code
-            return res.status(500).json({ message: "Internal Server Error" });
-        }
+        console.error("An error occurred while adding the product:", error);
+        return res.status(500).json({ message: "Internal Server Error" });
     }
 });
+
+
+const searchProduct = asyncHandler( async (req , res) => {
+    const {product} = req.body
+    console.log(req.body);
+    try {
+        if(!(product)) {
+            return res
+            .status(401)
+            .json({
+                message : "product or farmer name required"
+            })
+        }
+
+        const productInfo = await Product.find({ name: product }).populate('farmer', 'username');
+
+        console.log(productInfo);
+        if(productInfo.length === 0) {
+            return res
+            .status(401)
+            .json({
+                message : "products or farmer not found"
+            })
+        }
+
+
+        // const array = []
+
+
+        // for (const product of productInfo) {
+        //     console.log(product);
+        //     const farmer = await User.findOne({ _id: product.farmer });
+        //     console.log("Farmer found:", farmer); // Debugging
+        //     if (farmer) {
+        //         console.log("Farmer username:", farmer.username); // Debugging
+        //         product.farmer = farmer.username;
+        //     } else {
+        //         console.log("Farmer not found for product:", product._id); // Debugging
+        //     }
+        //     array.push(product);
+        // }
+
+        
+
+        return res
+        .status(201)
+        .json({
+            productInfo,
+            message : "Searched successfully"
+        })
+    } catch (error) {
+        console.log(error);   
+    }
+})
+
 
 
 export {
     registerUser,
     loginUser,
     logoutUser,
-    addProduct
+    addProduct,
+    searchProduct
 }

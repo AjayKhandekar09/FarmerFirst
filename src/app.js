@@ -7,13 +7,17 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.json({
-    limit : "16kb"
+    limit : "50mb"
 }))
 
 app.use(express.urlencoded({
-    limit : "16kb",
+    limit : "50mb",
     extended : true
 }))
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(500).json({ message: "Internal Server Error" });
+  });
 app.use(cookieParser())
 
 
