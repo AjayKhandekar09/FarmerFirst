@@ -1,58 +1,69 @@
-body{
+body {
     margin: 0;
     padding: 0;
     font-family: "Montserrat", sans-serif;
-    background-color:  #EAEDED;
+    background-color: #EAEDED;
     width: 100%;
     height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 4rem;
-}
+  }
 
-.main{
-    width: 46rem;
-    height: 30rem;
-    background-color: white;
-    border-radius: 1rem;
+  .container {
+    max-width: 800px;
+    margin: 0 auto; /* Center the container horizontally */
+  }
+
+  .product-info {
     display: flex;
-    flex-direction: column;
-}
-.image >img  {
-    height: 28rem;
-    width: 22rem;
-    background-color: yellow;
+    background-color: white;
+    padding: 5rem;
+  }
+
+  .product-info img {
+    width: 40%;
+    height: auto; /* Maintain image aspect ratio */
     border-radius: 1rem;
-    margin:1rem ;
-}
- .detail{
-    height: 28rem;
-    width: 22rem;
+    margin: 0 1rem 1rem 0; /* Add spacing around the image */
+  }
+
+  .details {
+    width: 60%;
+    padding: 1rem;
+  }
+
+  .details h3 {
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+  }
+
+  .details p {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+  }
+
+  .details .price {
+    font-weight: bold;
+  }
+
+  .quantity {
+    display: flex;
+    margin-bottom: 1rem;
+    align-items: center;
+  }
+
+  .quantity label {
+    margin-right: 1rem;
+    width: 50%; /* Allocate some space for the label */
+  }
+
+  .add-to-cart {
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    font-size: 1.2rem;
+    background-color: rgb(0, 187, 255);
+    color: white;
     border-radius: 1rem;
-    margin:1rem ;
-    
- }   
-
-.detail  button{
-
-   margin-right: 1rem;
-   margin-left: 2rem;
-   width: 10rem;
-   height: 4rem;
-
-}
-.detail > p{
-    margin-left: 1rem;
-    font-size: 1.5rem;
- }
-
-
-@media(min-width:820px){
-    .main {
-        flex-direction: row;
-        
-     }
-}
-
-
+  }

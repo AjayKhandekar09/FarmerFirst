@@ -1,15 +1,12 @@
-import multer from "multer"
-// import asyncHandler from "../utils/asyncHandler.utils.js"
+import multer from 'multer';
 
 const storage = multer.diskStorage({
-    destination : function(req,file,cb) {
-        cb(null,'./tmp')
+    destination: function (req, file, cb) {
+        cb(null, 'tmp') // Specify the directory where files will be stored
     },
-    filename : function(req,file,cb) {
-        cb(null,file.originalname)
+    filename: function (req, file, cb) {
+        cb(null, file.originalname) // Use the original filename
     }
-})
+});
 
-const upload = multer({storage:storage})
-
-export {upload}
+export const upload = multer({ storage: storage });

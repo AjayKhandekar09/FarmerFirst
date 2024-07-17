@@ -1,42 +1,48 @@
-import {v2 as cloudinary} from "cloudinary";
-import fs from "fs"
+import { v2 as cloudinary } from 'cloudinary';
+import fs from 'fs';
+import path from 'path';
 
-
-
-          
-cloudinary.config({ 
-  cloud_name :  "dvkaiwnzs", 
-  api_key : "391146242865275" , 
-  api_secret : "9E6jsfKlorlIBzGJzhpYvWzWJzg"
- 
+// Cloudinary configuration
+cloudinary.config({
+  cloud_name: 'dvkaiwnzs',
+  api_key: '391146242865275',
+  api_secret: '9E6jsfKlorlIBzGJzhpYvWzWJzg',
 });
 
-
-
 const uploadOnCloudinary = async (localFilePath) => {
- 
-    try {
-        
-        if(!localFilePath) return null;
+  try {
+    if (!localFilePath) return null;
 
-        const response = await cloudinary.uploader.upload(localFilePath , {
+    // Upload file to Cloudinary
+    const response = await cloudinary.uploader.upload(localFilePath, {
+      resource_type: 'auto',
+    });
 
-            resource_type : "auto"
-        })
-        //file has been uploaded
-        // console.log("file has been uploaded" , response.url);
-        fs.unlinkSync(localFilePath)
+    // File has been uploaded
+    console.log('File has been uploaded:', response.url);
 
-        return response;
-    } catch (error) {
-        console.log("cloudinary error",error)
-        fs.unlinkSync(localFilePath)
-        return null
+    // Ensure the file exists before attempting to delete it
+    if (fs.existsSync(localFilePath)) {
+      fs.unlinkSync(localFilePath);
+      console.log('File deleted successfully');
+    } else {
+      console.warn(`File already deleted or moved: ${localFilePath}`);
     }
-}
 
-export {uploadOnCloudinary}
+    return response;
+  } catch (error) {
+    console.error('Cloudinary error:', error);
 
-// cloudinary.uploader.upload("https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg",
-//   { public_id: "olympic_flag" }, 
-//   function(error, result) {console.log(result); });
+    // Ensure the file exists before attempting to delete it in case of error
+    if (fs.existsSync(localFilePath)) {
+      fs.unlinkSync(localFilePath);
+      console.log('File deleted successfully after error');
+    } else {
+      console.warn(`File already deleted or moved after error: ${localFilePath}`);
+    }
+
+    return null;
+  }
+};
+
+export { uploadOnCloudinary };

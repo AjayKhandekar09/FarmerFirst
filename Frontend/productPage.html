@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>product</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
-    rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
-     crossorigin="anonymous">
-    <link rel="stylesheet" href="productPage.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Page</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV3Z3R8jzQE6ZsADP+8ULzB/A2TCmYx9x3Ga6kqEM" crossorigin="anonymous">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="productPage.css">
 </head>
 <body>
-   
-        <div class="main">
-            <div class="image">
-                <img src="images/strawberry.png" alt="strawberry">
-            </div>
-            <div class="detail">
-                <h1> Fresh Strawberry</h1>
-                <p> M.R.P= Rs.40(250gm)</p>
-                <a href="cartPage.html">
-                    <button type="button" class="btn btn-info fs-5">ADD CART</button>
-                </a>
-                <br>
-                <br>
-                <button type="button" class="btn btn-info fs-5">BUY NOW</button>
-                <br>
-                <br>
-                <p>
-                    product detail:
-                </p>
-
-                
-            </div>
+  <div class="container">
+    <div class="product-info">
+      <img id="product-image" src="" alt="Product Image">
+      <div class="details">
+        <h3 id="product-name">Product Name</h3>
+        <p id="product-price" class="price"></p>
+        <p id="product-availability">Available: Quantity</p>
+        <p id="product-farmer">Farmer: Farmer Name</p>
+        <div class="quantity">
+          <label for="quantity">Quantity:</label>
+          <input type="number" id="quantity" min="1" max="25">
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-         crossorigin="anonymous"></script>
-    
+        <!-- <button class="btn btn-primary add-to-cart">Add to Cart</button> -->
+         <h4>Description</h4>
+         <p class="description" id="description" style="font-size: 1rem;"></p>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap JS (optional) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const prodData = JSON.parse(sessionStorage.getItem('viewProducts'));
+      if (prodData) {
+        console.log(prodData.availableQuantity);
+        console.log(prodData.farmer);
+
+        document.getElementById('product-image').src = prodData.images;
+        document.getElementById('product-name').textContent = prodData.name;
+        document.getElementById('product-price').innerHTML = `&#8377;${prodData.price} per ${prodData.quantityType === "0" ? "Kg" : "Dozen"}`;
+        document.getElementById('product-availability').textContent = `Available: ${prodData.available} ${prodData.quantityType === "0" ? "Kgs" : "Dozens"}`;
+        document.getElementById('product-farmer').textContent = `Farmer: ${prodData.farmer}`;
+        document.getElementById('description').textContent = prodData.message
+        document.getElementById('quantity').placeholder = prodData.quantity +`${prodData.quantityType === "0" ? " Kg" : " Dozen"}`; // Ensure max quantity is set
+        sessionStorage.removeItem('viewProducts')
+      } else {
+        alert('No product data available');
+      }
+    });
+  </script>
 </body>
 </html>

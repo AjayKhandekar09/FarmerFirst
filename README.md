@@ -8,3 +8,8 @@
 6. Api error handling middleware
 7. Need to write the proper routes inside the fetch when deployed
 8. Secured channel is removed
+9. need to secure the every feature for checking logined user or not
+//backend 
+1. add isAvailable true
+2. then update the add product and create product
+3. quantity customization

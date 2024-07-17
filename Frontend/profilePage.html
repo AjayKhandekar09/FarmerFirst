@@ -4,114 +4,93 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="homePage.css"> -->
     <title>homePage</title>
 </head>
+<script src="loginUser.js"></script>
+
 <body>
     <div class="container">
         <div class="row">
             <div class="col">
                 <div class="profile">
-                    <img class="img-fluid" src="images/farmerProfile.jpg">
+                    <img class="img-fluid" id="profile" src="images/farmerProfile.jpg">
                 </div>
-                <div class="col-md-5 fileIp">
+                <!-- <div class="col-md-5 fileIp">
                     <input class="form-control bg-info fileIpActual" id="formFileLg" type="file">
-                </div>
+                </div> -->
                 <div class="col-md-5 fileIp editDiv">
-                    <button class="btn bg-info editButton">
+                    <button class="btn bg-info editButton" >
                        Edit Profile
                     </button>
                 </div>
                 <div class="col-md-5 fileIp saveDiv">
-                    <button class="btn bg-info saveButton">
+                    <button class="btn bg-info saveButton" onclick="saveProfile(event)">
                        Save Profile
                     </button>
                 </div>
             </div>
-            <form class="form g-3 col-6 needs-validation forms" nonvalidate>
+            <form class="form g-3 col-6 needs-validation forms" novalidate>
                 <div class="col">
                     <label class="form-label">Name</label>
-                    <input class="form-control"  required readonly value="Ram Patil" >              
+                    <input class="form-control" id="nameInput" required readonly>              
                 </div>
                 <div class="col">
                     <label class="form-label">Age</label>
-                    <input class="form-control"  required 
-                    readonly value="26">              
+                    <input class="form-control" required readonly id="ageInput">              
                 </div>
                 <div class="col">
                     <label class="form-label">Gender</label>
-                    <select class="form-select"  disabled required >  
-                    <option selected disabled value=""></option>
-                    <option selected>Male</option>
-                    <option>Female</option>
+                    <select class="form-select" id="genderInput" disabled required>
+                        <option value="" disabled>Select Gender</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
                     </select>
                 </div>
-              
                 <div class="col">
                     <label class="form-label">Email</label>
-                    <input class="form-control" type="email" required readonly value="rampatil@gmail.com">
+                    <input class="form-control" type="email" required readonly id="emailInput">
                 </div>
                 <div class="col">
                     <label class="form-label">Phone Number</label>
-                    <input class="form-control" type="text" required readonly value="1234567890">
+                    <input class="form-control" type="text" required readonly id="phoneInput">
                 </div>
-    
                 <div class="row">
                     <div class="col-md-6">
                         <label class="form-label">Country</label>
-                        <select class="form-select" required disabled>
-                            <option selected disabled value="Country"></option>
-                            <option selected>India</option>
-                            <option>USA</option>
-                        </select>
+                        <input class="form-control" id="countryInput" required readonly>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label">State</label>
-                        <select class="form-select" required disabled>
-                            <option selected disabled value="State"></option>
-                            <option selected>Maharashtra</option>
-                            
-                        </select>
+                        <input class="form-control" id="stateInput" required readonly>
                     </div>
-    
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label class="form-label">District</label>
-                        <select class="form-select" required disabled>
-                            <option selected disabled value="District"></option>
-                            <option selected>Kolhapur</option>
-                    
-                        </select>
+                        <input class="form-control" id="districtInput" required readonly>
                     </div>
-                    
                     <div class="col-md-6">
                         <label class="form-label">City</label>
-                        <select class="form-select" required disabled>
-                            <span>Qty:</span>
-                            <option selected disabled value="City"></option>
-                            <option selected>Ichalkaranji</option>
-                        </select>
+                        <input class="form-control" id="cityInput" required readonly>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <label class="form-label">Locality</label>
-                        <input type="text" class="form-control" required readonly value="Patil mala , sangli road">
+                        <input type="text" class="form-control" required readonly id="localityInput">
                     </div>
-                    
                     <div class="col-md-6">
                         <label class="form-label">Pincode</label>
-                        <input type="text" class="form-control" required readonly value="416115">
+                        <input type="text" class="form-control" required readonly id="pincodeInput">
                     </div>
                 </div>
-    </form>
+            </form>
         </div>
     </div>
 </body>
 <style>
     .forms {
-        /* background-color: green; */
         background-color: rgba(255, 255, 255, 0);
         margin: 0rem;
         padding: 0rem;
@@ -119,71 +98,88 @@
         margin-top: 2rem;
     }
     body {
-    padding-left : 0;
-    padding-right : 0;
-    background-image: url("images/farmBackground.png");
-    background-repeat: repeat;
-    background-size: cover; color: rgb(0, 0, 0)
+        padding-left: 0;
+        padding-right: 0;
+        background-image: url("images/farmBackground.png");
+        background-repeat: repeat;
+        background-size: cover;
+        color: rgb(0, 0, 0)
     }
     .profile {
-        width:40%;
-        margin : auto;
+        width: 40%;
+        margin: auto;
         margin-top: 2rem;
     }
-    .fileIp{
-        top:auto;
-        margin : auto;
-
+    .fileIp {
+        top: auto;
+        margin: auto;
         padding-left: auto;
     }
     .fileIpActual {
         background-color: aqua;
     }
-    .editDiv , .saveDiv {
-        width : 8rem;
+    .editDiv, .saveDiv {
+        width: 8rem;
         height: 2rem;
-        margin:auto;
-        padding-left : auto;
-        margin-top : 2rem;
-
-       
+        margin: auto;
+        padding-left: auto;
+        margin-top: 2rem;
     }
 </style>
-
 <script>
-
     const editButton = document.querySelector(".editButton");
-    editButton.addEventListener("click" , enableEdit);
+    editButton.addEventListener("click", enableEdit);
 
     const saveButton = document.querySelector(".saveButton");
-    saveButton.addEventListener("click" , disableEdit);
+    saveButton.addEventListener("click", disableEdit);
 
     function enableEdit() {
-        const forms = document.querySelector(".forms")
-        console.log(forms);
-        for(const i of forms) {
-            if(i.localName === "input")
-             i.readOnly = false;
-            else if(i.localName == "select")
-            i.disabled = false;
+        const forms = document.querySelector(".forms");
+        for (const i of forms) {
+            if (i.localName === "input")
+                i.readOnly = false;
+            else if (i.localName === "select")
+                i.disabled = false;
         }
-
-    } 
-
-
-    // enableEdit();
-    function disableEdit() {
-        const forms = document.querySelector(".forms")
-        console.log(forms);
-        for(const i of forms) {
-            if(i.localName === "input")
-             i.readOnly = true;
-            else if(i.localName == "select")
-            i.disabled = true;
-        }
-
     }
-</script>
 
+    function disableEdit() {
+        const forms = document.querySelector(".forms");
+        for (const i of forms) {
+            if (i.localName === "input")
+                i.readOnly = true;
+            else if (i.localName === "select")
+                i.disabled = true;
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const userData = JSON.parse(sessionStorage.getItem('userData'));
+
+        document.getElementById('nameInput').value = userData.user.username;
+        document.getElementById('ageInput').value = userData.user.age;
+        document.getElementById('genderInput').selected = userData.user.gender;
+        document.getElementById('emailInput').value = userData.user.email;
+        document.getElementById('phoneInput').value = userData.user.phone;
+        document.getElementById('countryInput').value = userData.user.country;
+        document.getElementById('profile').src = userData.user.profilePhoto;
+
+        // alert(JSON.stringify(userData))
+        document.getElementById('stateInput').value = userData.user.state;
+        document.getElementById('districtInput').value = userData.user.district;
+        document.getElementById('cityInput').value = userData.user.city;
+        document.getElementById('localityInput').value = userData.user.street;
+        document.getElementById('pincodeInput').value = userData.user.pincode;
+
+        // Set the gender value correctly
+        const genderInput = document.getElementById('genderInput');
+        for (const option of genderInput.options) {
+            if (option.value === userData.user.gender) {
+                option.selected = true;
+                break;
+            }
+        }
+    });
+</script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </html>
